@@ -2,7 +2,7 @@
   "name": "lights-on",
   "description": "Lights ON! project on AngularJS",
   "version": "0.0.1",
-  //"homepage": "https://github.com/angular/angular-seed",
+  "homepage": "https://github.com/ricardmc/lights",
   "license": "MIT",
   "private": true,
   "dependencies": {

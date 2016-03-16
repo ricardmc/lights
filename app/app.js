@@ -2,11 +2,11 @@
 
 angular.module('lightsOn', [
   'ngRoute',
-  'lightsOn.board'
+  'board'
 ]).
 
 config(['$routeProvider', function($routeProvider) {
   $routeProvider
-      .when('/', {templateUrl: 'board/board.html'}) //, controller: 'board/boardController.js'})
+      .when('/', {templateUrl: 'board/board.html', controller: 'boardController'})
       .otherwise({redirectTo: '/'});
 }])
