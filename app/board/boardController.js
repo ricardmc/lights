@@ -1,6 +1,6 @@
 angular.module('board',[])
 
-.controller('boardController', function($scope){
+.controller('boardController', function($scope) {
 
     $scope.lights = [
         {className: 'uk-icon-bell'},
@@ -29,24 +29,29 @@ angular.module('board',[])
         $scope.numOfLights = 4;
     }
 
-    $scope.lightOn = function(id){
+    $scope.lightOn = function (id) {
+        changeState(id);
+        if (id != $scope.lights.length - 1){
+            changeState(id + 1);
+        }
+        if (id != 0){
+            changeState(id - 1);
+        }
+        if(id < $scope.lights.length - 4) {
+            changeState(id + 4);
+        }
+        if(id > 3) {
+            changeState(id - 4);
+        }
+    }
+
+
+    function changeState(id){
         if($scope.lights[id].className === $scope.classOn){
             $scope.lights[id].className = $scope.classOff;
-
-            $scope.lights[id+1].className = $scope.classOff;
-            $scope.lights[id-1].className = $scope.classOff;
         }else{
             $scope.lights[id].className = $scope.classOn;
-
-            $scope.lights[id+1].className = $scope.classOn;
-            $scope.lights[id-1].className = $scope.classOn;
         }
-
-        /*if($event.currentTarget.className === $scope.classOn){
-            $event.currentTarget.className = $scope.classOff;
-        }else{
-            $event.currentTarget.className = $scope.classOn;
-        }*/
     }
 
 
