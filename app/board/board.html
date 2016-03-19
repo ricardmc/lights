@@ -1,7 +1,7 @@
 <div class="uk-container" ng-controller="boardController">
     <div class="uk-grid uk-center">
         <div ng-repeat="light in lights track by $index" class="uk-width-1-4">
-            <i class="{{light.className}}" ng-click="lightOn($index)" data-index="$index"></i>
+            <i class="{{light.className}}" id="{{light.x}}{{light.y}}" ng-click="lightOn($index, $event)" data-x="{{light.x}}" data-y="{{light.y}}"></i>
         </div>
     </div>
 </div>
