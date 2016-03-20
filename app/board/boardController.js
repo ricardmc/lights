@@ -1,6 +1,6 @@
 angular.module('board',[])
 
-.controller('boardController', function($scope, $rootScope, $elem) {
+.controller('boardController', function($scope) {
 
     $scope.lights = [
         {className: 'uk-icon-bell', y:'1', x:'1'},
@@ -19,7 +19,9 @@ angular.module('board',[])
         {className: 'uk-icon-bell-o', y:'4', x:'2'},
         {className: 'uk-icon-bell-o', y:'4', x:'3'},
         {className: 'uk-icon-bell', y:'4', x:'4'},
-    ]
+    ];
+
+    initialize();
 
     function initialize() {
         $scope.titol = 'Lights ON';
@@ -34,58 +36,45 @@ angular.module('board',[])
         var y = $event.currentTarget.dataset.y;
         var xy = x + y;
 
-        console.log(xy)
-
         changeState(xy);
-        /*if(id != $scope.lights.length - 1){
-            changeState(id + 1);
-        }
-        if (id != 0){
-            changeState(id - 1);
-        }
-        if(id < $scope.lights.length - 4) {
-            changeState(id + 4);
-        }
-        if(id > 3) {
-            changeState(id - 4);
-        }*/
 
         if(1 < x){
-            xy -= 10;
-            changeState(xy);
+            changeState(parseInt(xy) - 10);
         }
         if(x < 4){
-            xy += 10;
-            changeState(xy)
-            //console.log('x+1 correcte')
+            changeState(parseInt(xy) + 10);
         }
         if(1 < y){
-            xy -= 1;
-            changeState(xy);
-            //console.log('y-1 correcte')
+            changeState(parseInt(xy) - 1);
         }
         if(y < 4){
-            xy += 1;
-            changeState(xy);
-            //console.log('y+1 correcte')
+            changeState(parseInt(xy) + 1);
         }
 
+        checkStatusGame();
         console.log('--------')
     }
 
 
     function changeState(id){
-        var element = elem.find('#'+id);
-        console.dir($elem)
+        var element = angular.element.find('#'+id);
+        var classElement = element[0].className;
+        //console.log(id[0]+' - '+id[1])
 
-        /*if($scope.lights[id].className === $scope.classOn){
-            $scope.lights[id].className = $scope.classOff;
+        if(classElement === $scope.classOn){
+            element[0].className = $scope.classOff;
+
         }else{
-            $scope.lights[id].className = $scope.classOn;
-        }*/
+            element[0].className = $scope.classOn;
+        }
+    }
+
+    function checkStatusGame(){
+        /*var lights = angular.element
+        $scope.lights.forEach(function(light){
+            console.log(light.className);
+        })*/
     }
 
 
-
-    initialize();
 })
