@@ -52,29 +52,52 @@ angular.module('board',[])
         }
 
         checkStatusGame();
-        console.log('--------')
     }
 
 
     function changeState(id){
         var element = angular.element.find('#'+id);
         var classElement = element[0].className;
-        //console.log(id[0]+' - '+id[1])
+
 
         if(classElement === $scope.classOn){
             element[0].className = $scope.classOff;
-
+            editLights(id, false);
         }else{
             element[0].className = $scope.classOn;
+            editLights(id, true);
+        }
+    }
+
+    function editLights(id,on){
+        var digits = (""+id).split("");
+        var len = $scope.lights.length;
+
+        for(var i=0; i < len; i++){
+            if($scope.lights[i].x == digits[0] && $scope.lights[i].y == digits[1]){
+                if(on){
+                    $scope.lights[i].className = $scope.classOn;
+                }else{
+                    $scope.lights[i].className = $scope.classOff;
+                }
+            }
         }
     }
 
     function checkStatusGame(){
-        /*var lights = angular.element
+        var on = 0;
+        var off = 0;
+
         $scope.lights.forEach(function(light){
-            console.log(light.className);
-        })*/
+            if(light.className == $scope.classOn){
+                on++;
+            }else{
+                off++;
+            }
+        })
+
+        if(on == $scope.lights.length){
+            alert('Has guanyat!');
+        }
     }
-
-
 })
